@@ -1,0 +1,31 @@
+<section class="randgen">
+<header class="page-header">
+  <h1><{$smarty.const._MD_RANDGEN_LANG_GENERATOR}><{$smarty.const._LIST}><{if $xoops_isuser}> <a class="btn" href="<{xoops_cooluri dirname=$dirname dataname=$dataname action=edit}>"><i class="icon-plus"></i> <{$smarty.const._MD_RANDGEN_LANG_ADD_A_NEW_GENERATOR}></a><{/if}></h1>
+</header>
+<{if $introduction}>
+  <div class="description">
+    <{$introduction}>
+  </div>
+<{/if}>
+<ul class="inline">
+  <li><i class="icon-caret-right"></i> <a href="<{xoops_cooluri dirname=$dirname dataname=$dataname}>"><{$smarty.const._MD_RANDGEN_LANG_SHOW_ALL}></a></li>
+  <li><i class="icon-caret-right"></i> <a href="<{xoops_cooluri dirname=$dirname dataname=$dataname query="uid=`$xoops_userid`"}>"><{$smarty.const._MD_RANDGEN_LANG_FILTER_BY_UID}></a></li>
+</ul>
+<{if count($objects) > 0}>
+  <{foreach item=obj from=$objects}>
+    <div class="well">
+      <h3>
+        <span class="badge badge-inverse">id: <{$obj->getShow('generator_id')}></span>
+        <a href="<{xoops_cooluri dirname=$dirname dataname=$dataname data_id=$obj->get('generator_id')}>"><{$obj->getShow('title')}></a>
+        <span class="label label-info"><{$obj->showCategory()}></span>
+      </h3>
+      <div><{$obj->getShow('description')}></div>
+      <ul class="inline">
+        <li><i class="icon-caret-right"></i> <{$obj->getShow('uid')|xoops_user:user_name}></li>
+        <li><i class="icon-caret-right"></i> <{$obj->getShow('posttime')|xoops_formattimestamp:m}></li>
+      </ul>
+    </div>
+  <{/foreach}>
+  <nav class="pagenavi"><{xoops_pagenavi pagenavi=$pageNavi}></nav>
+<{/if}>
+</section>

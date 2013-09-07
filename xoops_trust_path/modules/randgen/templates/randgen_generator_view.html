@@ -1,0 +1,34 @@
+<article class="randgen">
+  <header class="page-header">
+    <h1>
+      <span class="badge badge-inverse">id: <{$object->getShow('generator_id')}></span>
+      <{$object->getShow('title')}>
+      <span class="label label-info"><{$object->showCategory()}></span>
+      <{if $isEditor}> <a class="btn btn-small" href="<{xoops_cooluri dirname=$dirname dataname=$dataname data_id=$object->get('generator_id') action=edit}>"><i class="icon-pencil"></i> <{$smarty.const._EDIT}></a>
+      <a class="btn btn-small" href="<{xoops_cooluri dirname=$dirname dataname=$dataname data_id=$object->get('generator_id') action=delete}>"><i class="icon-trash"></i> <{$smarty.const._DELETE}></a><{/if}>
+      <{if $xoops_isuser}>
+      <a class="btn btn-small" href="<{xoops_cooluri dirname=$dirname dataname=$dataname data_id=$object->get('generator_id') action=copy}>"><i class="icon-copy"></i> <{$smarty.const._MD_RANDGEN_LANG_COPY}></a>
+      <{/if}>
+    </h1>
+  </header>
+  <ul class="inline">
+    <li><i class="icon-caret-right"></i> <{$object->getShow('uid')|xoops_user:user_name}></li>
+    <li><i class="icon-caret-right"></i> <{$object->getShow('posttime')|xoops_formattimestamp:m}></li>
+  </ul>
+  <!-- tag -->
+  <{if count($object->mTag)>0}>
+  <ul class="inline tagList">
+    <{foreach item=tag from=$object->mTag}>
+    <{assign var=tagurl value=$tag|xoops_escape:url}>
+    <li class="label"><a href="<{xoops_cooluri dirname=$dirname dataname=$dataname query="tag=`$tag`"}>"><{$tag|xoops_escape}></a></li>
+    <{/foreach}>
+  </ul>
+  <{/if}>
+  <div><{$object->getShow('description')}></div>
+  <div class="item-list">
+    <{randgen_generator_tree tree=$itemArray}>
+  </div>
+  <textarea>
+<{$object->get('items')}>
+</textarea>
+</article>
