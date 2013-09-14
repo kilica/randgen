@@ -64,6 +64,7 @@ class Randgen_GeneratorCopyAction extends Randgen_GeneratorEditAction
             $this->mObject = $this->mObjectHandler->create();
             $this->mObject->set('title', $original->get('title'));
             $this->mObject->set('category_id', $original->get('category_id'));
+            $this->mObject->set('original_id', $original->get('generator_id'));
             $this->mObject->set('description', $original->get('description'));
             $this->mObject->set('items', $original->get('items'));
         }

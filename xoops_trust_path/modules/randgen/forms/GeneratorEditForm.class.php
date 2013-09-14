@@ -46,6 +46,7 @@ class Randgen_GeneratorEditForm extends XCube_ActionForm
         $this->mFormProperties['title'] = new XCube_StringProperty('title');
         $this->mFormProperties['uid'] = new XCube_IntProperty('uid');
         $this->mFormProperties['category_id'] = new XCube_IntProperty('category_id');
+        $this->mFormProperties['original_id'] = new XCube_IntProperty('original_id');
         $this->mFormProperties['description'] = new XCube_TextProperty('description');
         $this->mFormProperties['items'] = new XCube_TextProperty('items');
         $this->mFormProperties['posttime'] = new XCube_IntProperty('posttime');
@@ -80,6 +81,7 @@ class Randgen_GeneratorEditForm extends XCube_ActionForm
         $this->set('title', $obj->get('title'));
         $this->set('uid', $obj->get('uid'));
         $this->set('category_id', $obj->get('category_id'));
+        $this->set('original_id', $obj->get('original_id'));
         $this->set('description', $obj->get('description'));
         $this->set('items', $obj->get('items'));
         $this->set('posttime', $obj->get('posttime'));
@@ -99,6 +101,7 @@ class Randgen_GeneratorEditForm extends XCube_ActionForm
     {
         $obj->set('title', $this->get('title'));
         $obj->set('category_id', $this->get('category_id'));
+        $obj->set('original_id', $this->get('original_id'));
         $obj->set('description', $this->get('description'));
         $obj->set('items', $this->get('items'));
         $obj->mTag = explode(' ', trim($this->get('tags')));

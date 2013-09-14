@@ -10,7 +10,7 @@
 function smarty_function_randgen_generator_tree($params, &$smarty)
 {
     $tree = $params['tree'];
-    $htmltag = '<div class="well">%s';
+    $htmltag = '<div class="well"><em class="title">%s</em> : %s';
     $depth = 0;
     $html = '';
     foreach(array_keys($tree['description']) as $key){
@@ -18,17 +18,17 @@ function smarty_function_randgen_generator_tree($params, &$smarty)
         $description = nl2br(htmlspecialchars($tree['description'][$key], ENT_QUOTES, 'UTF-8'));
         if($depth == $currentDepth){
             $html .= "</div>";
-            $html .= sprintf($htmltag, $description);
+            $html .= sprintf($htmltag, $tree['title'][$key], $description);
         }
         elseif($depth > $currentDepth){
             for($i=0;$i<$depth-$currentDepth;$i++){
                 $html .= "</div>";
             }
-            $html .= sprintf($htmltag, $description);
+            $html .= sprintf($htmltag, $tree['title'][$key], $description);
             $depth = $currentDepth;
         }
         elseif($depth < $currentDepth){
-            $html .= sprintf($htmltag, $description);
+            $html .= sprintf($htmltag, $tree['title'][$key], $description);
             $depth = $currentDepth;
         }
     }

@@ -78,6 +78,8 @@ $modversion['templates'] = array(
         array('file' => '{dirname}_generator_edit.html','description' => _MI_RANDGEN_TPL_GENERATOR_EDIT),
         array('file' => '{dirname}_generator_list.html','description' => _MI_RANDGEN_TPL_GENERATOR_LIST),
         array('file' => '{dirname}_generator_view.html','description' => _MI_RANDGEN_TPL_GENERATOR_VIEW),
+        array('file' => '{dirname}_generator_inc_activity.html','description' => _MI_RANDGEN_TPL_GENERATOR_VIEW),
+        array('file' => '{dirname}_generator_inc_view.html','description' => _MI_RANDGEN_TPL_GENERATOR_VIEW),
         array('file' => '{dirname}_page_delete.html','description' => _MI_RANDGEN_TPL_PAGE_DELETE),
         array('file' => '{dirname}_page_edit.html','description' => _MI_RANDGEN_TPL_PAGE_EDIT),
         array('file' => '{dirname}_page_list.html','description' => _MI_RANDGEN_TPL_PAGE_LIST),

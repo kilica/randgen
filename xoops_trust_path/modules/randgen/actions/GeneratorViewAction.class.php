@@ -72,6 +72,8 @@ class Randgen_GeneratorViewAction extends Randgen_AbstractViewAction
         $render->setTemplateName($this->mAsset->mDirname . '_generator_view.html');
         $render->setAttribute('object', $this->mObject);
         $render->setAttribute('itemArray', $this->mObject->getRandomItem());
+        $render->setAttribute('originalGenerators', $this->mObjectHandler->getOriginalGenerators($this->mObject));
+
         $render->setAttribute('dirname', $this->mAsset->mDirname);
         $render->setAttribute('dataname', self::DATANAME);
         $render->setAttribute('accessController', $this->mAccessController['main']);

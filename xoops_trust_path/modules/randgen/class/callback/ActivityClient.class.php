@@ -35,7 +35,6 @@ class Randgen_ActivityClientDelegate implements Legacy_iActivityClientDelegate
         foreach($dirnames as $dir){
             //setup client module info
                 $list[] = array('dirname'=>$dir, 'dataname'=>'generator', 'access_controller'=>Randgen_Utils::getModuleConfig($dir, 'access_controller'));
-       
         }
     
         $isCalled = true;

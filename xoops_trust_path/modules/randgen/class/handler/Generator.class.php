@@ -33,6 +33,7 @@ class Randgen_GeneratorObject extends Legacy_AbstractObject
         $this->initVar('title', XOBJ_DTYPE_STRING, '', false, 255);
         $this->initVar('uid', XOBJ_DTYPE_INT, '', false);
         $this->initVar('category_id', XOBJ_DTYPE_INT, '', false);
+        $this->initVar('original_id', XOBJ_DTYPE_INT, '', false);
         $this->initVar('description', XOBJ_DTYPE_TEXT, '', false);
         $this->initVar('items', XOBJ_DTYPE_TEXT, '**1|sample-1|1|
 **1|sample-2|2|
@@ -59,12 +60,14 @@ This is sample-3 description|1|
 
     public function getItemArray()
     {
-        $ret = array('ratio'=>array(), 'description'=>array(), 'repeat'=>array(), 'child'=>array());
+        $ret = array('id'=>array(), 'title'=>array(), 'ratio'=>array(), 'description'=>array(), 'repeat'=>array(), 'child'=>array());
         $items = $this->get('items');
         $itemLines = explode('**', $items);
         array_shift($itemLines);
         foreach($itemLines as $item){
             $cols = explode('|', $item);
+            $ret['id'][] = $this->getShow('generator_id');
+            $ret['title'][] = $this->getShow('title');
             $ret['ratio'][] = (int)$cols[0];
             $ret['description'][] = $cols[1];
             $ret['repeat'][] = isset($cols[2]) ? (int)$cols[2] : 1;
@@ -83,9 +86,9 @@ This is sample-3 description|1|
 
         $repeated++;
         if($repeated > self::MAXREPEAT){
-            return array('ratio'=>array(), 'description'=>array(), 'repeat'=>array(), 'child'=>array(), 'depth'=>array());
+            return array('id'=>array(), 'title'=>array(), 'ratio'=>array(), 'description'=>array(), 'repeat'=>array(), 'child'=>array(), 'depth'=>array());
         }
-        $ret = array('ratio'=>array(), 'description'=>array(), 'repeat'=>array(), 'child'=>array(), 'depth'=>array());
+        $ret = array('id'=>array(), 'title'=>array(), 'ratio'=>array(), 'description'=>array(), 'repeat'=>array(), 'child'=>array(), 'depth'=>array());
         $itemArray = $this->getItemArray();
         $sum = array_sum($itemArray['ratio']);
         $rand = mt_rand(1, $sum);
@@ -98,6 +101,8 @@ This is sample-3 description|1|
                         $generator = $handler->get($childId);
                         if($generator instanceof Randgen_GeneratorObject){
                             $item = $generator->getRandomItem($depth+1);
+                            $ret['id'] = array_merge($item['id'], $ret['id']);
+                            $ret['title'] = array_merge($item['title'], $ret['title']);
                             $ret['ratio'] = array_merge($item['ratio'], $ret['ratio']);
                             $ret['description'] = array_merge($item['description'], $ret['description']);
                             $ret['repeat'] = array_merge($item['repeat'], $ret['repeat']);
@@ -110,6 +115,8 @@ This is sample-3 description|1|
                 if($itemArray['repeat'][$i]>1){
                     for($j=0;$j<$itemArray['repeat'][$i];$j++){
                         $item = $this->getRandomItem($depth);
+                        $ret['id'] = array_merge($item['id'], $ret['id']);
+                        $ret['title'] = array_merge($item['title'], $ret['title']);
                         $ret['ratio'] = array_merge($item['ratio'], $ret['ratio']);
                         $ret['description'] = array_merge($item['description'], $ret['description']);
                         $ret['repeat'] = array_merge($item['repeat'], $ret['repeat']);
@@ -119,6 +126,8 @@ This is sample-3 description|1|
                     break;
                 }
                 else{
+                    array_unshift($ret['id'], $itemArray['id'][$i]);
+                    array_unshift($ret['title'], $itemArray['title'][$i]);
                     array_unshift($ret['ratio'], $itemArray['ratio'][$i]);
                     array_unshift($ret['description'], $this->_parseItemDescription($itemArray['description'][$i]));
                     array_unshift($ret['repeat'], $itemArray['repeat'][$i]);
@@ -180,6 +189,23 @@ class Randgen_GeneratorHandler extends Legacy_AbstractClientObjectHandler
         $this->mTable = strtr($this->mTable,array('{dirname}' => $dirname));
         parent::XoopsObjectGenericHandler($db);
     }
+
+    public function getOriginalGenerators($obj)
+    {
+        $list = array();
+        if($obj->get('original_id')==0){
+            return $list;
+        }
+        $original = $this->get($obj->get('original_id'));
+        if($original->get('original_id')>0){
+            $list = array_merge(array($original), $this->getOriginalGenerators($original));
+        }
+        else{
+            $list = array($original);
+        }
+        return $list;
+    }
+
 
 }
 

@@ -86,7 +86,7 @@ class Randgen_DelegateFunctions
         //catetgory name set
         if($object instanceof Legacy_AbstractObject){
             if($object->get('category_id')>0){
-                $accessController = Randgen_Utils::getAccessController($dirname);
+                $accessController = Randgen_Utils::getAccessControllerModule($dirname);
                 if($accessController instanceof XoopsModule){
                     $categoryDirname = $accessController->getVar('dirname');
                 }

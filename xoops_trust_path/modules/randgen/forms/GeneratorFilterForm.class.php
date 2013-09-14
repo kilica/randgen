@@ -79,6 +79,10 @@ class Randgen_GeneratorFilterForm extends Randgen_AbstractFilterForm
             $this->mNavi->addExtra('category_id', $value);
             $this->_mCriteria->add(new Criteria('category_id', $value));
         }
+        if (($value = $root->mContext->mRequest->getRequest('original_id')) !== null) {
+            $this->mNavi->addExtra('original_id', $value);
+            $this->_mCriteria->add(new Criteria('original_id', $value));
+        }
         if (($value = $root->mContext->mRequest->getRequest('description')) !== null) {
             $this->mNavi->addExtra('description', $value);
             $this->_mCriteria->add(new Criteria('description', $value));

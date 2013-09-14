@@ -33,6 +33,9 @@ define('_MD_RANDGEN_LANG_GENERATOR_DELETE', 'ランダム表の削除');
 define('_MD_RANDGEN_LANG_GENERATOR', 'ランダム表');
 define('_MD_RANDGEN_LANG_COPY', 'コピー');
 define('_MD_RANDGEN_LANG_SHOW_ALL', 'すべて表示する');
+define('_MD_RANDGEN_LANG_RESULT', '結果');
+define('_MD_RANDGEN_LANG_HISTORY','元となったランダム表');
+define('_MD_RANDGEN_LANG_ORIGINAL','元');
 define('_MD_RANDGEN_LANG_FILTER_BY_UID', '自分のランダム表を表示する');
 define('_MD_RANDGEN_MESSAGE_ITEMS_FORMAT', '「**」を入れると結果の先頭とみなされます。その後ろに、以下のルールでランダム表の結果を入力していってください。それぞれのルールの間は、 | で区切ります。<ul></li><li>出現割合（数字）。この数字を、全出現割合を足した数字で割った数が、出現確率となります</li><li>内容を入力します。HTMLタグは使えません。{123456} のように、ランダム表のIDの数字を { } で囲って本欄に記述すると、そのランダム表の結果が挿入されます。</li><li>（任意）この結果が出た時に、このランダム表での再ロールする回数</li><li>（任意）この結果が出た時に参照する子となるランダム表のID（generator_id）。「,」で区切ってIDを複数入力することも出来ます。</li></ul>');
 
